@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../dashboard.dart';
+import '../home.dart';
 
 class InvestorRegistrationFivePage extends StatefulWidget {
   const InvestorRegistrationFivePage({Key? key}) : super(key: key);
@@ -45,7 +45,7 @@ class _InvestorRegistrationFivePageState
                 width: double.infinity,
                 height: 48,
                 child: FilledButton(
-                    onPressed: () => context.go("/dashboard_page"),
+                    onPressed: () => context.go("/home_page"),
                     child: Text("Validate"))),
           )
         ]));

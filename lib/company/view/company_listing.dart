@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../entity/company.dart';
-import 'company_listing_detail.dart';
 
 class CompanyListingPage extends StatefulWidget {
   CompanyListingPage({super.key});
@@ -107,7 +106,7 @@ class _CompanyListingPageState extends State<CompanyListingPage> {
                 itemBuilder: (_, int index) {
                   return GestureDetector(
                       onTap: () => context.go(
-                          "/dashboard_page/company_listing_detail_page",
+                          "/company_listing_page/company_listing_detail_page",
                           extra: _companies[index]),
                       child: Container(
                           decoration: BoxDecoration(
