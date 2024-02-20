@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../entity/company.dart';
+import '../company/entity/company.dart';
 
 class CompanyListingPage extends StatefulWidget {
   CompanyListingPage({super.key});

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'company/view/company_listing.dart';
+import 'company_listing.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

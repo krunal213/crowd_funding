@@ -55,7 +55,7 @@ class _CompanyRegistrationOnePageState
                 width: double.infinity,
                 height: 48,
                 child: FilledButton(
-                    onPressed: () => context.go("/customer_type/company_registration_two_page"),
+                    onPressed: () => context.push("/company_registration_two_page"),
                     child: Text("Validate"))),
           )
         ]));

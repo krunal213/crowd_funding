@@ -36,14 +36,14 @@ class _CustomerTypeState extends State<CustomerType> {
                   height: 48,
                   child: FilledButton(
                       onPressed: () =>
-                          context.go('/customer_type/company_registration_one_page'),
+                          context.push('/company_registration_one_page'),
                       child: Text("Company"))),
               SizedBox(
                   width: double.infinity,
                   height: 48,
                   child: FilledButton(
                       onPressed: () =>
-                          context.go('/customer_type/investor_registration_one_page'),
+                          context.push('/investor_registration_one_page'),
                       child: Text("Investor")))
             ],
           ),

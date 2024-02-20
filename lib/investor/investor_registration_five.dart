@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../home.dart';
+import '../dashboard/home.dart';
 
 class InvestorRegistrationFivePage extends StatefulWidget {
   const InvestorRegistrationFivePage({Key? key}) : super(key: key);

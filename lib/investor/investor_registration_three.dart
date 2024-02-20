@@ -43,7 +43,7 @@ class _InvestorRegistrationThreePageState extends State<InvestorRegistrationThre
                 width: double.infinity,
                 height: 48,
                 child: FilledButton(onPressed: () =>
-                    context.go("/customer_type/investor_registration_four_page"), child: Text("Validate"))),
+                    context.push("/investor_registration_four_page"), child: Text("Validate"))),
           )
         ]));
   }

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'investor_registration_three.dart';
-
 class InvestorRegistrationTwoPage extends StatefulWidget {
   const InvestorRegistrationTwoPage({Key? key}) : super(key: key);
 
@@ -45,7 +43,7 @@ class _InvestorRegistrationTwoPageState extends State<InvestorRegistrationTwoPag
                 width: double.infinity,
                 height: 48,
                 child: FilledButton(onPressed: () =>
-                    context.go("/customer_type/investor_registration_three_page"), child: Text("Validate"))),
+                    context.push("/investor_registration_three_page"), child: Text("Validate"))),
           )
         ]));
   }

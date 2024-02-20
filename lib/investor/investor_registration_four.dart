@@ -45,7 +45,7 @@ class _InvestorRegistrationFourPageState
                 height: 48,
                 child: FilledButton(
                     onPressed: () =>
-                        context.go("/customer_type/investor_registration_five_page"),
+                        context.push("/investor_registration_five_page"),
                     child: Text("Validate"))),
           )
         ]));

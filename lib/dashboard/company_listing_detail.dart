@@ -4,8 +4,9 @@ import 'package:crowdfunding/company/view/news.dart';
 import 'package:crowdfunding/company/view/revenue_and_valuation.dart';
 import 'package:flutter/material.dart';
 
-import '../entity/company.dart';
-import 'competitor.dart';
+import '../company/entity/company.dart';
+import '../company/view/competitor.dart';
+
 
 class CompanyListingDetailPage extends StatefulWidget {
   final Company _company;
