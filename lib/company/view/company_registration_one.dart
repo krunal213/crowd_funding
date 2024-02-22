@@ -1,9 +1,11 @@
+import 'dart:ffi';
+
 import 'package:crowdfunding/company/bloc/company_bloc.dart';
+import 'package:crowdfunding/result.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-
-import 'company_registration_one_response.dart';
 
 class CompanyRegistrationOnePage extends StatefulWidget {
   const CompanyRegistrationOnePage({super.key});
@@ -26,7 +28,6 @@ class _CompanyRegistrationOnePageState
 
   @override
   Widget build(BuildContext context) {
-    print(_companyBloc);
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -40,11 +41,18 @@ class _CompanyRegistrationOnePageState
               child: Wrap(
                 runSpacing: 20,
                 children: [
-                  TextField(
-                      decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'CIN/LLPIN/FLLPIN/FCRN',
-                  ))
+                  StreamBuilder(
+                      stream: _companyBloc.cinStream,
+                      builder: (context, snapShot) {
+                        return TextField(
+                            onChanged: _companyBloc.onCINChanged,
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: 'CIN/LLPIN/FLLPIN/FCRN',
+                                errorText: snapShot.hasError
+                                    ? snapShot.error as String
+                                    : null));
+                      })
                 ],
               ),
             ),
@@ -55,9 +63,24 @@ class _CompanyRegistrationOnePageState
                 width: double.infinity,
                 height: 48,
                 child: FilledButton(
-                    onPressed: () => context.push("/company_registration_two_page"),
+                    onPressed: () => _companyBloc
+                        .validateCINNumber() /*context.push("/company_registration_two_page")*/,
                     child: Text("Validate"))),
-          )
+          ),
+          StreamBuilder(
+              stream: _companyBloc.validateCINNumberStream,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  switch (snapshot.data.runtimeType) {
+                    case Success:
+                      SchedulerBinding.instance.addPostFrameCallback((_) {
+                        context.push("/company_registration_two_page");
+                      });
+                      break;
+                  }
+                }
+                return Container();
+              })
         ]));
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NewsPage extends StatefulWidget {
   const NewsPage({Key? key}) : super(key: key);
@@ -9,6 +9,8 @@ class NewsPage extends StatefulWidget {
 }
 
 class _NewsPageState extends State<NewsPage> {
+  final Uri _url = Uri.parse('https://www.prnewswire.com/news-releases/organ-on-chip-market-to-reach-1-6-bn-globally-by-2030-at-31-1-cagr-allied-market-research-301528929.html');
+
   List<String> _getNews() => [
         "2022-04-20 - Organ-on-Chip Market to Reach \$1.6 Bn, Globally, by 2030 at ...\n"
             "Allied Market Research provides global enterprises as well as medium and small businesses with unmatched quality of \"Market Research Reports\"...",
@@ -30,8 +32,10 @@ class _NewsPageState extends State<NewsPage> {
         padding: EdgeInsets.all(16),
         itemCount: news.length,
         itemBuilder: (_, int index) {
-          return GestureDetector(
-            onTap: () => {},
+          return InkWell(
+            onTap: () {
+              _launchUrl();
+            },
             child: Text(
               news[index],
               style: TextStyle(
@@ -48,5 +52,12 @@ class _NewsPageState extends State<NewsPage> {
     );
   }
 
+  Future<void> _launchUrl() async {
+    try {
+      await launchUrl(_url);
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
 
 }

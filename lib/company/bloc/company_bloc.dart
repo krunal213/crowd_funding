@@ -1,85 +1,87 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:crowdfunding/company/contract.dart';
+import 'package:crowdfunding/exception.dart';
+import 'package:crowdfunding/result.dart';
 import 'package:rxdart/rxdart.dart';
 
-/*class _EmailErrorException implements Exception {
-  String cause = 'Enter valid name';
+class _CINNumberErrorException implements Exception {
+  String cause = 'Enter valid cin';
 
-  _EmailErrorException();
+  _CINNumberErrorException();
 }
 
-class _PassWordErrorException implements Exception {
-  String cause = 'Enter valid password';
+class _PANNumberErrorException implements Exception {
+  String cause = 'Enter valid PAN';
 
-  _PassWordErrorException();
-}*/
+  _PANNumberErrorException();
+}
 
 class CompanyBloc {
+  CompanyBloc(this._companyRepository);
 
   late final CompanyRepository _companyRepository;
 
-  CompanyBloc(this._companyRepository);
+  final _cinController = BehaviorSubject<String>();
 
-/*final _emailController = BehaviorSubject<String>();
+  Stream<String> get cinStream => _cinController.stream;
 
-  Stream<String> get email => _emailController.stream;
+  Function(String) get onCINChanged => _cinController.sink.add;
 
-  final _passwordController = BehaviorSubject<String>();
+  final _validateCINNumberController = BehaviorSubject<Result>();
 
-  Stream<String> get password => _passwordController.stream;
+  Stream<Result> get validateCINNumberStream =>
+      _validateCINNumberController.stream;
 
-  Function(String) get onEmailChanged => _emailController.sink.add;
+  final _panNumberController = BehaviorSubject<String>();
 
-  Function(String) get onPasswordChanged => _passwordController.sink.add;
+  Stream<String> get panNumberStream => _panNumberController.stream;
 
-  final _isUserValidController = BehaviorSubject<Result>();
+  Function(String) get onPanNumberChanged => _panNumberController.sink.add;
 
-  Stream<Result> get isValid => _isUserValidController.stream;
+  final _validatePANNumberController = BehaviorSubject<Result>();
 
-  LoginBloc(this._loginRepository);
+  Stream<Result> get validatePANNumberStream =>
+      _validatePANNumberController.stream;
 
-  Stream<Result> isUserLogin() async* {
+  validateCINNumber() async {
+    try {
+      _validateCINNumberController.add(Loading());
+      final cinNumber = _cinController.valueOrNull;
+      if (cinNumber == null || cinNumber.isEmpty) {
+        throw _CINNumberErrorException();
+      }
+      _validateCINNumberController.add(await Success(null));
+    } on _CINNumberErrorException catch (e) {
+      _cinController.addError(e.cause);
+      _validateCINNumberController.add(Error(e));
+    } on Exception catch(e){
+      _validateCINNumberController.add(Error(SomethingWentWrongException()));
+    }
+  }
+
+  validatePANNumber() async {
+    try {
+      _validatePANNumberController.add(Loading());
+      final panNumber = _panNumberController.valueOrNull;
+      if (panNumber == null || panNumber.isEmpty) {
+        throw _PANNumberErrorException();
+      }
+      _validatePANNumberController.add(await Success(null));
+    } on _PANNumberErrorException catch (e) {
+      _panNumberController.addError(e.cause);
+      _validatePANNumberController.add(Error(e));
+    } on Exception catch(e){
+      _validatePANNumberController.add(Error(SomethingWentWrongException()));
+    }
+  }
+
+  /*Stream<Result> isUserLogin() async* {
     try {
       yield await _loginRepository.isUserLogin() == true
           ? Success(null)
           : throw Exception();
     } on Exception catch (e) {
       yield Error(e);
-    }
-  }
-
-  Future<void> isUserValid() async {
-    try {
-      _isUserValidController.add(Loading());
-      final email = _emailController.valueOrNull;
-      final password = _passwordController.valueOrNull;
-      if (email == null || email.isEmpty) {
-        throw _EmailErrorException();
-      }
-      if (password == null || password.isEmpty) {
-        throw _PassWordErrorException();
-      }
-      _isUserValidController.add(
-          await _loginRepository.isUserValid(email, password) == true
-              ? Success(null)
-              : throw Exception());
-    } on _EmailErrorException catch (e) {
-      _emailController.addError(e.cause);
-      _isUserValidController.add(Error(e));
-    } on _PassWordErrorException catch (e) {
-      _passwordController.addError(e.cause);
-      _isUserValidController.add(Error(e));
-    } on DioError catch (e) {
-      if (e.type == DioErrorType.other) {
-        if (e.error is SocketException) {
-          _isUserValidController.add(Error(NoInternetConnectionException()));
-        }
-      } else if (e.type == DioErrorType.response) {
-        _isUserValidController.add(Error(SomethingWentWrongException()));
-      }
-    } on Exception catch (e) {
-      _isUserValidController.add(Error(e));
     }
   }*/
 

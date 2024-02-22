@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
-import 'company_registration_three.dart';
+import '../../result.dart';
+import '../bloc/company_bloc.dart';
 
 class CompanyRegistrationTwoPage extends StatefulWidget {
   const CompanyRegistrationTwoPage({super.key});
@@ -15,6 +18,13 @@ class CompanyRegistrationTwoPage extends StatefulWidget {
 
 class _CompanyRegistrationTwoPageState
     extends State<CompanyRegistrationTwoPage> {
+  late CompanyBloc _companyBloc;
+
+  @override
+  void initState() {
+    _companyBloc = GetIt.I.get<CompanyBloc>();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,11 +40,18 @@ class _CompanyRegistrationTwoPageState
               child: Wrap(
                 runSpacing: 20,
                 children: [
-                  TextField(
-                      decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'PAN Number',
-                  ))
+                  StreamBuilder<String>(
+                      stream: _companyBloc.panNumberStream,
+                      builder: (context, snapshot) {
+                        return TextField(
+                            onChanged: _companyBloc.onPanNumberChanged,
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: 'PAN Number',
+                                errorText: snapshot.hasError
+                                    ? snapshot.error as String
+                                    : null));
+                      })
                 ],
               ),
             ),
@@ -45,9 +62,23 @@ class _CompanyRegistrationTwoPageState
                 width: double.infinity,
                 height: 48,
                 child: FilledButton(
-                    onPressed: () => context.push("/company_registration_three_page"),
+                    onPressed: () => _companyBloc.validatePANNumber(),
                     child: Text("Validate"))),
-          )
+          ),
+          StreamBuilder(
+              stream: _companyBloc.validatePANNumberStream,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  switch (snapshot.data.runtimeType) {
+                    case Success:
+                      SchedulerBinding.instance.addPostFrameCallback((_) {
+                        context.push("/company_registration_three_page");
+                      });
+                      break;
+                  }
+                }
+                return Container();
+              })
         ]));
   }
 }
