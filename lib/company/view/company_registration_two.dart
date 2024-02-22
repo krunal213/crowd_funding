@@ -1,3 +1,4 @@
+import 'package:crowdfunding/navigations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:get_it/get_it.dart';
@@ -72,7 +73,7 @@ class _CompanyRegistrationTwoPageState
                   switch (snapshot.data.runtimeType) {
                     case Success:
                       SchedulerBinding.instance.addPostFrameCallback((_) {
-                        context.push("/company_registration_three_page");
+                        CompanyRegistrationThreePageRoute().push(context);
                       });
                       break;
                   }

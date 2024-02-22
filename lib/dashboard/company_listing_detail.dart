@@ -9,9 +9,9 @@ import '../company/view/competitor.dart';
 
 
 class CompanyListingDetailPage extends StatefulWidget {
-  final Company _company;
+  final Company company;
 
-  CompanyListingDetailPage(this._company, {Key? key}) : super(key: key);
+  CompanyListingDetailPage(this.company, {Key? key}) : super(key: key);
 
   @override
   State<CompanyListingDetailPage> createState() =>
@@ -49,7 +49,7 @@ class _CompanyListingDetailPageState extends State<CompanyListingDetailPage>
                   child: Row(
                     children: [
                       Image.asset(
-                        widget._company.logo,
+                        widget.company.logo,
                         width: 80,
                         height: 80,
                       ),
@@ -61,7 +61,7 @@ class _CompanyListingDetailPageState extends State<CompanyListingDetailPage>
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                widget._company.companyName,
+                                widget.company.companyName,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
                                 style: const TextStyle(
@@ -71,7 +71,7 @@ class _CompanyListingDetailPageState extends State<CompanyListingDetailPage>
                                 spacing: 8,
                                 children: [
                                   Text(
-                                    widget._company.industryType,
+                                    widget.company.industryType,
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 1,
                                     style: TextStyle(

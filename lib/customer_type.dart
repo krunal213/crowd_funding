@@ -1,3 +1,4 @@
+import 'package:crowdfunding/navigations.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'company/view/company_registration_one.dart';
@@ -36,14 +37,14 @@ class _CustomerTypeState extends State<CustomerType> {
                   height: 48,
                   child: FilledButton(
                       onPressed: () =>
-                          context.push('/company_registration_one_page'),
+                          CompanyRegistrationOnePageRoute().push(context),
                       child: Text("Company"))),
               SizedBox(
                   width: double.infinity,
                   height: 48,
                   child: FilledButton(
                       onPressed: () =>
-                          context.push('/investor_registration_one_page'),
+                          InvestorRegistrationOnePageRoute().push(context),
                       child: Text("Investor")))
             ],
           ),

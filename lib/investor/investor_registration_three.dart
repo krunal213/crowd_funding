@@ -1,4 +1,5 @@
 import 'package:crowdfunding/investor/investor_registration_four.dart';
+import 'package:crowdfunding/navigations.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -43,7 +44,7 @@ class _InvestorRegistrationThreePageState extends State<InvestorRegistrationThre
                 width: double.infinity,
                 height: 48,
                 child: FilledButton(onPressed: () =>
-                    context.push("/investor_registration_four_page"), child: Text("Validate"))),
+                    InvestorRegistrationFourPageRoute().push(context), child: Text("Validate"))),
           )
         ]));
   }

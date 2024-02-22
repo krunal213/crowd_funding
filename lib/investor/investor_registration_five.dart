@@ -1,3 +1,4 @@
+import 'package:crowdfunding/navigations.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -45,7 +46,7 @@ class _InvestorRegistrationFivePageState
                 width: double.infinity,
                 height: 48,
                 child: FilledButton(
-                    onPressed: () => context.go("/home_page"),
+                    onPressed: () => HomePageRouteData().go(context),
                     child: Text("Validate"))),
           )
         ]));

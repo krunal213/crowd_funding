@@ -7,7 +7,7 @@ class DashboardPage extends StatelessWidget {
   const DashboardPage({
     required this.navigationShell,
     Key? key,
-  }) : super(key: key ?? const ValueKey<String>('ScaffoldWithNavBar'));
+  }) ;
 
   @override
   Widget build(BuildContext context) {

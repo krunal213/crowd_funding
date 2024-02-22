@@ -1,6 +1,5 @@
-import 'dart:ffi';
-
 import 'package:crowdfunding/company/bloc/company_bloc.dart';
+import 'package:crowdfunding/navigations.dart';
 import 'package:crowdfunding/result.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -74,7 +73,7 @@ class _CompanyRegistrationOnePageState
                   switch (snapshot.data.runtimeType) {
                     case Success:
                       SchedulerBinding.instance.addPostFrameCallback((_) {
-                        context.push("/company_registration_two_page");
+                        CompanyRegistrationTwoPageRoute().push(context);
                       });
                       break;
                   }

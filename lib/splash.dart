@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:crowdfunding/navigations.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -15,7 +16,7 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     Timer(
         Duration(seconds: 5),
-        () => context.go('/customer_type'));
+        () => CustomerTypePageRoute().go(context));
   }
 
   @override

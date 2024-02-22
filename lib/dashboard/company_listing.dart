@@ -1,3 +1,4 @@
+import 'package:crowdfunding/navigations.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../company/entity/company.dart';
@@ -105,9 +106,7 @@ class _CompanyListingPageState extends State<CompanyListingPage> {
                 itemCount: _companies.length,
                 itemBuilder: (_, int index) {
                   return GestureDetector(
-                      onTap: () => context.go(
-                          "/company_listing_page/company_listing_detail_page",
-                          extra: _companies[index]),
+                      onTap: () => CompanyListingDetailPageRouteData(_companies[index]).go(context),
                       child: Container(
                           decoration: BoxDecoration(
                               border: Border.all(),

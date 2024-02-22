@@ -1,3 +1,4 @@
+import 'package:crowdfunding/navigations.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -49,7 +50,7 @@ class _InvestorRegistrationOnePageState
                 height: 48,
                 child: FilledButton(
                     onPressed: () =>
-                        context.push("/investor_registration_two_page"),
+                        InvestorRegistrationTwoPageRoute().push(context),
                     child: Text("Submit"))),
           )
         ]));
